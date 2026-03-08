@@ -11,6 +11,11 @@
 - `GET /api/users` : 사용자 목록
 - `POST /api/users` : 사용자 생성 (`email`, `name`)
 
+## DB 마이그레이션
+- PostgreSQL은 `fastapi-app/.env.example`의 `DATABASE_URL`과 같은 형태로 연결한다.
+- 기본 타임존 정책: UTC를 사용한다.
+- 마이그레이션 설계 문서: `fastapi-app/docs/postgresql-migration-design.md`
+
 ## 폴더 구조
 - `app/api`: 라우터
 - `app/core`: 환경 설정
