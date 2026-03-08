@@ -12,7 +12,7 @@ class Cocktail(Base):
     __tablename__ = "cocktail"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("user.id"), nullable=True)
     cocktail_name: Mapped[str] = mapped_column(String(50), nullable=False)
     proof: Mapped[float] = mapped_column(Float, nullable=False)
     glass: Mapped[Glass] = mapped_column(

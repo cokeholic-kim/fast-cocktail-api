@@ -8,7 +8,7 @@ from app.models.enums import UserRole, LoginMethod
 
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = "user"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     nick_name: Mapped[str] = mapped_column("nick_name", String(50), nullable=False)

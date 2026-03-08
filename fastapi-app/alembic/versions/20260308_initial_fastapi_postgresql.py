@@ -19,7 +19,7 @@ depends_on = None
 
 def upgrade() -> None:
     op.create_table(
-        "users",
+        "user",
         sa.Column("id", sa.BigInteger(), primary_key=True, nullable=False),
         sa.Column("nick_name", sa.String(length=50), nullable=False),
         sa.Column("email", sa.String(length=100), nullable=False),
@@ -31,7 +31,7 @@ def upgrade() -> None:
             nullable=False,
             server_default="app",
         ),
-        sa.PrimaryKeyConstraint("id", name=op.f("pk_users")),
+        sa.PrimaryKeyConstraint("id", name=op.f("pk_user")),
     )
 
     op.create_table(
@@ -42,14 +42,14 @@ def upgrade() -> None:
         sa.Column("file_size", sa.BigInteger(), nullable=True),
         sa.Column("file_type", sa.String(), nullable=True),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=True),
-        sa.Column("uploader_id", sa.BigInteger(), sa.ForeignKey("users.id")),
+        sa.Column("uploader_id", sa.BigInteger(), sa.ForeignKey("user.id")),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_files")),
     )
 
     op.create_table(
         "oauth_user",
         sa.Column("id", sa.BigInteger(), primary_key=True, nullable=False),
-        sa.Column("user_id", sa.BigInteger(), sa.ForeignKey("users.id"), nullable=False),
+        sa.Column("user_id", sa.BigInteger(), sa.ForeignKey("user.id"), nullable=False),
         sa.Column("email", sa.String(length=200), nullable=False),
         sa.Column("domain", sa.String(length=100), nullable=False),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_oauth_user")),
@@ -71,7 +71,7 @@ def upgrade() -> None:
     op.create_table(
         "cocktail",
         sa.Column("id", sa.BigInteger(), primary_key=True, nullable=False),
-        sa.Column("user_id", sa.BigInteger(), sa.ForeignKey("users.id")),
+        sa.Column("user_id", sa.BigInteger(), sa.ForeignKey("user.id")),
         sa.Column("cocktail_name", sa.String(length=50), nullable=False),
         sa.Column("proof", sa.Float(), nullable=False),
         sa.Column("glass", sa.String(length=50), nullable=False),
@@ -101,7 +101,7 @@ def upgrade() -> None:
     op.create_table(
         "comment",
         sa.Column("id", sa.BigInteger(), primary_key=True, nullable=False),
-        sa.Column("user_id", sa.BigInteger(), sa.ForeignKey("users.id"), nullable=False),
+        sa.Column("user_id", sa.BigInteger(), sa.ForeignKey("user.id"), nullable=False),
         sa.Column("parent_comment_id", sa.BigInteger(), sa.ForeignKey("comment.id")),
         sa.Column("content", sa.String(length=500), nullable=False),
         sa.Column("ref_category", sa.String(length=50), nullable=False),
@@ -139,4 +139,4 @@ def downgrade() -> None:
     op.drop_table("ingredient")
     op.drop_table("oauth_user")
     op.drop_table("files")
-    op.drop_table("users")
+    op.drop_table("user")

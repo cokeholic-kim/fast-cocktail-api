@@ -17,6 +17,6 @@ class File(Base):
     file_size: Mapped[int] = mapped_column(BigInteger, nullable=True)
     file_type: Mapped[str] = mapped_column(String, nullable=True)
     created_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
-    uploader_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    uploader_id: Mapped[int | None] = mapped_column(ForeignKey("user.id"), nullable=True)
 
     uploader: Mapped["User"] = relationship("User")

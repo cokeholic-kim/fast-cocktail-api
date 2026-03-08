@@ -10,7 +10,7 @@ class Oauth2User(Base):
     __tablename__ = "oauth_user"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False, unique=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False, unique=True)
     email: Mapped[str] = mapped_column(String(200), nullable=False)
     domain: Mapped[str] = mapped_column(String(100), nullable=False)
 

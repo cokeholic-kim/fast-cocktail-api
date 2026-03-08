@@ -13,7 +13,7 @@ class Comment(Base):
     __tablename__ = "comment"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"), nullable=False)
     parent_comment_id: Mapped[int | None] = mapped_column(ForeignKey("comment.id"), nullable=True)
     content: Mapped[str] = mapped_column(String(500), nullable=False)
     ref_category: Mapped[CommentRefCategory] = mapped_column(
