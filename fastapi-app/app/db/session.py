@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from app.core.config import get_settings
 from app.db.base import Base
-from app.models import user as user_model
+from app import models  # noqa: F401
 
 settings = get_settings()
 
