@@ -1,3 +1,0 @@
-# application-dev.yml
-server:
-  port: 8082  # dev 환경에서 사용할 포트
