@@ -32,6 +32,3 @@
 ## DB 마이그레이션
 - 현재 스키마 반영: `alembic -c alembic.ini upgrade head`
 - 새 변경 반영: `alembic -c alembic.ini revision --autogenerate -m "..."` 후 `alembic upgrade head`
-
-## 참고
-- 실행 가이드와 설계 문서는 `fastapi-app/docs/postgresql-migration-design.md` 참고
