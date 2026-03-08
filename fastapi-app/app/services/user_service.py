@@ -1,20 +1,27 @@
 from typing import Sequence
+from app.repositories.user import UserRepository
 
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.user import User
 from app.schemas.user import UserCreate
+from app.models.user import User
 
 
 async def create_user(db: AsyncSession, payload: UserCreate) -> User:
-    user = User(email=payload.email, name=payload.name)
-    db.add(user)
-    await db.flush()
-    await db.refresh(user)
-    return user
+    user = User(
+        nick_name=payload.nick_name,
+        email=payload.email,
+        password=payload.password,
+        role=payload.role,
+        login_method=payload.login_method,
+    )
+    return await UserRepository.create(db, user)
 
 
 async def list_users(db: AsyncSession) -> Sequence[User]:
-    result = await db.execute(select(User).order_by(User.id.asc()))
-    return result.scalars().all()
+    users = await UserRepository.list_all(db)
+    return users
+
+
+async def exists_by_email(db: AsyncSession, email: str) -> bool:
+    return await UserRepository.exists_by_email(db, email)
