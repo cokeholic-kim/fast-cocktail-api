@@ -6,10 +6,10 @@
 - `fastapi-app/requirements.txt`: Python 의존성
 
 ## 실행 준비
-1. Python 3.11 가상환경 생성
+1. Python 3.14 가상환경 생성
    - `cd fastapi-app`
    - `python -m venv .venv`
-   - `\.\ .venv\Scripts\Activate`
+   - `.\.venv\Scripts\Activate`
 2. 패키지 설치
    - `pip install -r requirements.txt`
 3. 환경변수 파일 준비
